@@ -10,6 +10,7 @@ Production-oriented monorepo for an advanced automation platform inspired by n8n
 - Database: PostgreSQL
 - AI: OpenAI API
 - Orchestration: Docker Compose
+- CI: GitHub Actions (`.github/workflows/ci.yml`)
 
 ## Project Structure
 
