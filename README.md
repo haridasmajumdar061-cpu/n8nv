@@ -12,6 +12,16 @@ Production-oriented monorepo for an advanced automation platform inspired by n8n
 - Orchestration: Docker Compose
 - CI: GitHub Actions (`.github/workflows/ci.yml`)
 
+## Automated Verification
+
+- Local API smoke test script: `scripts/smoke_api.py`
+- GitHub Docker E2E workflow: `.github/workflows/e2e-docker.yml`
+- Run locally (with stack up):
+
+```bash
+python scripts/smoke_api.py
+```
+
 ## Project Structure
 
 - `frontend/` React app with drag-and-drop workflow builder and Life OS dashboard

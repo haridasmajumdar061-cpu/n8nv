@@ -1,0 +1,42 @@
+name: Docker E2E Smoke
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start stack
+        run: docker compose up --build -d
+
+      - name: Wait for backend health
+        run: |
+          for i in {1..40}; do
+            if curl -fsS http://localhost:8000/health >/dev/null; then
+              echo "backend ready"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "backend health check failed"
+          docker compose logs backend
+          exit 1
+
+      - name: Run smoke API test
+        run: python scripts/smoke_api.py
+
+      - name: Check frontend HTTP
+        run: curl -I http://localhost:5173
+
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose logs --tail=200
+
+      - name: Stop stack
+        if: always()
+        run: docker compose down -v
