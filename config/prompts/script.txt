@@ -1,0 +1,19 @@
+You are writing a YouTube script in {{ channel.language }}.
+Tone: {{ channel.tone }}
+Target length: {{ content.video_length_minutes }} minutes.
+
+Topic: {{ idea }}
+
+Structure:
+{% for section in content.video_structure %}
+- {{ section }}
+{% endfor %}
+
+Include:
+- A strong hook in the first 10 seconds
+- Simple language
+- Short sentences
+- B-roll notes in [BROLL: ...] if enabled
+- Sound notes in [SFX: ...] if enabled
+
+Write the full script.

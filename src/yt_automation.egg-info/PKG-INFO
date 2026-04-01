@@ -1,0 +1,72 @@
+Metadata-Version: 2.4
+Name: yt-automation
+Version: 0.1.0
+Summary: Local YouTube content automation pipeline (ideas, scripts, metadata).
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: jinja2>=3.1
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: requests>=2.31
+Requires-Dist: rich>=13.0
+
+# YouTube Automation (Local Pipeline)
+
+This project generates YouTube content assets locally: ideas, scripts, titles,
+descriptions, tags, thumbnail text, and shorts prompts. It is designed to work
+offline by default with a simple template-based generator. You can later plug
+in your preferred LLM provider if needed.
+
+## Quick Start
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -e .
+```
+
+Generate ideas:
+
+```bash
+yt-automation ideas
+```
+
+Generate a full pack (idea + script + metadata + shorts + thumbnail text):
+
+```bash
+yt-automation run
+```
+
+Outputs are written to the `outputs/` folder.
+
+## Configuration
+
+Edit `config/channel.yaml` to set:
+
+- Niche and audience
+- Language and tone
+- Video length and structure
+- Upload cadence and style
+
+Prompt templates live in `config/prompts/`.
+
+## Optional LLM Provider
+
+By default, the pipeline runs in `mock` mode and uses templates.
+If you want to wire an API provider later, set:
+
+```
+LLM_PROVIDER=openai
+OPENAI_API_KEY=your_key_here
+OPENAI_MODEL=gpt-4o-mini
+```
+
+This project includes a minimal OpenAI HTTP client in `src/yt_automation/llm.py`.
+You can expand or replace it to fit your needs.
+
+## Files
+
+- `src/yt_automation/cli.py` CLI entrypoint
+- `src/yt_automation/pipeline.py` main pipeline orchestration
+- `config/channel.yaml` channel configuration
+- `config/prompts/*.txt` prompt templates

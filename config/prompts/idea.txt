@@ -1,0 +1,8 @@
+You are a YouTube content strategist.
+Channel niche: {{ channel.niche }}
+Audience: {{ channel.audience }}
+Language: {{ channel.language }}
+Tone: {{ channel.tone }}
+
+Generate 10 fresh video ideas with clear hooks.
+Return as a numbered list, one idea per line.

@@ -1,0 +1,11 @@
+Create {{ shorts.count }} shorts based on the main idea.
+Language: {{ channel.language }}
+Tone: {{ channel.tone }}
+Max length: {{ shorts.max_seconds }} seconds.
+
+Topic: {{ idea }}
+
+Return as a numbered list. Each short should include:
+- Hook
+- Core idea
+- CTA (subscribe or like)

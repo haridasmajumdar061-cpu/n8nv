@@ -1,0 +1,25 @@
+{
+  "name": "Daily Planner and Focus Mode",
+  "description": "Generate daily plan, trigger focus mode, save memory",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "trigger",
+      "config": { "trigger": "cron", "cron": "0 7 * * *" }
+    },
+    {
+      "id": "2",
+      "type": "ai",
+      "config": { "task": "Create day routine for my goals" }
+    },
+    {
+      "id": "3",
+      "type": "action",
+      "config": { "provider": "life_os", "action": "focus_mode", "duration_minutes": 50 }
+    }
+  ],
+  "edges": [
+    { "source": "1", "target": "2" },
+    { "source": "2", "target": "3" }
+  ]
+}

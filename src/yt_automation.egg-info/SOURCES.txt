@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/yt_automation/__init__.py
+src/yt_automation/__main__.py
+src/yt_automation/cli.py
+src/yt_automation/llm.py
+src/yt_automation/pipeline.py
+src/yt_automation/templates.py
+src/yt_automation/utils.py
+src/yt_automation.egg-info/PKG-INFO
+src/yt_automation.egg-info/SOURCES.txt
+src/yt_automation.egg-info/dependency_links.txt
+src/yt_automation.egg-info/entry_points.txt
+src/yt_automation.egg-info/requires.txt
+src/yt_automation.egg-info/top_level.txt

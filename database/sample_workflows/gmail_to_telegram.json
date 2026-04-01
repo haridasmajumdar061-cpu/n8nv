@@ -1,0 +1,25 @@
+{
+  "name": "Gmail Summary to Telegram",
+  "description": "Reads new Gmail emails, summarizes with AI, sends to Telegram",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "trigger",
+      "config": { "trigger": "gmail_new_email", "query": "is:unread" }
+    },
+    {
+      "id": "2",
+      "type": "ai",
+      "config": { "task": "Summarize email into 3 bullets" }
+    },
+    {
+      "id": "3",
+      "type": "action",
+      "config": { "provider": "telegram", "action": "send_message", "chat_id": "123456" }
+    }
+  ],
+  "edges": [
+    { "source": "1", "target": "2" },
+    { "source": "2", "target": "3" }
+  ]
+}

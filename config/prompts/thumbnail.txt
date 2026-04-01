@@ -1,0 +1,6 @@
+Generate 5 thumbnail text options (max 4 words each).
+Language: {{ channel.language }}
+Tone: {{ channel.tone }}
+Topic: {{ idea }}
+
+Return as a numbered list.

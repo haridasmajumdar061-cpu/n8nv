@@ -1,0 +1,12 @@
+You are a YouTube metadata expert.
+Language: {{ channel.language }}
+Tone: {{ channel.tone }}
+Topic: {{ idea }}
+
+Generate:
+1) 5 clickable titles (not clickbait)
+2) 1 description (120-180 words)
+3) 15 tags (comma separated)
+4) 1 pinned comment suggestion
+
+Return in JSON with keys: titles, description, tags, pinned_comment.

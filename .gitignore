@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyc.*
+**/__pycache__/
+outputs/
+.env
+frontend/node_modules/
+frontend/dist/
+backend/.venv/
+client_secrets.json.json

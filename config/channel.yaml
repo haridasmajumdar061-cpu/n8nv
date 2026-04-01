@@ -1,0 +1,41 @@
+channel:
+  name: "Your Channel Name"
+  niche: "Interesting facts and explainers"
+  language: "Bangla"
+  audience: "General audience (13+)"
+  tone: "Friendly, curious, and concise"
+
+content:
+  video_length_minutes: 6
+  video_structure:
+    - hook
+    - setup
+    - main_points
+    - recap
+    - call_to_action
+  cadence_per_week: 3
+  include_broll_notes: true
+  include_sound_design_notes: true
+
+shorts:
+  count: 3
+  max_seconds: 50
+
+output:
+  base_dir: "outputs"
+  folder_prefix: "pack"
+
+llm:
+  provider: "mock"
+  model: "gpt-4o-mini"
+  temperature: 0.6
+  max_tokens: 1200
+
+metadata:
+  title: "Your Channel Name"
+  description: ""
+  tags:
+    - "knowledge"
+    - "bangla"
+  category_id: "27"
+  privacy: "private"
