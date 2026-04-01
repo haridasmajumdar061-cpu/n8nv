@@ -22,6 +22,12 @@ Production-oriented monorepo for an advanced automation platform inspired by n8n
 python scripts/smoke_api.py
 ```
 
+## Health Endpoints
+
+- `GET /health/live` for liveness probe
+- `GET /health/ready` for dependency-aware readiness probe (Postgres + Redis)
+- `GET /health` returns readiness payload
+
 ## Project Structure
 
 - `frontend/` React app with drag-and-drop workflow builder and Life OS dashboard

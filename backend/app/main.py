@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.router import api_router
 from app.core.database import Base, engine
 from app.core.logging import configure_logging
+from app.services.health_service import health_service
 from app.utils.scheduler import start_scheduler
 
 
@@ -31,4 +32,14 @@ app.include_router(api_router)
 
 @app.get("/health")
 async def health() -> dict:
-    return {"status": "ok"}
+    return await health_service.readiness()
+
+
+@app.get("/health/live")
+async def health_live() -> dict:
+    return await health_service.liveness()
+
+
+@app.get("/health/ready")
+async def health_ready() -> dict:
+    return await health_service.readiness()

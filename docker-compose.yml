@@ -7,6 +7,12 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-ailifeos}
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-ailifeos}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
     volumes:
       - pg_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -15,6 +21,12 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
 
   backend:
     build:
@@ -25,8 +37,22 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live', timeout=5)",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     volumes:
       - ./backend:/app/backend
 
@@ -38,9 +64,12 @@ services:
       - .env.example
     command: celery -A app.core.celery_app.celery_app worker -Q workflows -l info -P solo --concurrency=1
     depends_on:
-      - backend
-      - redis
-      - db
+      backend:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
     volumes:
       - ./backend:/app/backend
 
@@ -54,7 +83,20 @@ services:
     ports:
       - "5173:5173"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:5173', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1));",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
     volumes:
       - ./frontend:/app/frontend
       - /app/frontend/node_modules
