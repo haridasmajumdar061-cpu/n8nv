@@ -100,6 +100,21 @@ docker compose up --build
    - Frontend: `http://localhost:5173`
    - Backend docs: `http://localhost:8000/docs`
 
+## Run In Production Mode (Docker)
+
+1. Prepare production env:
+   - Copy `.env.production.example` values into your secure environment file.
+2. Start production stack:
+
+```bash
+docker compose -f docker-compose.prod.yml up --build -d
+```
+
+3. Access apps:
+   - Frontend (Nginx): `http://localhost:8080`
+   - Backend API: `http://localhost:8000`
+   - Backend docs: `http://localhost:8000/docs`
+
 ## Local Development
 
 ### Backend
